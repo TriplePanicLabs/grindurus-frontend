@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/TriplePanicLabs/grindurus-frontend/static/css/main.80a474a0.css",
+    "main.js": "/TriplePanicLabs/grindurus-frontend/static/js/main.86aa5a5d.js",
+    "static/js/453.17d47443.chunk.js": "/TriplePanicLabs/grindurus-frontend/static/js/453.17d47443.chunk.js",
+    "static/media/logoGrindURUS.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoGrindURUS.80fb8795f568e2e5e239.png",
+    "static/media/logoArbitrum.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoArbitrum.b751f41f799396b16e3a.png",
+    "static/media/logoUSDC.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoUSDC.c4477cfcf6565cacc68b.png",
+    "static/media/logoOptimism.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoOptimism.9ddb4d93cef9df3f0ed4.png",
+    "static/media/logoUSDT.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoUSDT.c1d587669942a5e9bc47.png",
+    "static/media/logoPolygon.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoPolygon.9279b195b4676fc88db4.png",
+    "static/media/logoBase.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoBase.e5d127ccc8f237f58ad8.png",
+    "static/media/logoWETH.png": "/TriplePanicLabs/grindurus-frontend/static/media/logoWETH.1959d178de495d78005b.png",
+    "index.html": "/TriplePanicLabs/grindurus-frontend/index.html",
+    "main.80a474a0.css.map": "/TriplePanicLabs/grindurus-frontend/static/css/main.80a474a0.css.map",
+    "main.86aa5a5d.js.map": "/TriplePanicLabs/grindurus-frontend/static/js/main.86aa5a5d.js.map",
+    "453.17d47443.chunk.js.map": "/TriplePanicLabs/grindurus-frontend/static/js/453.17d47443.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80a474a0.css",
+    "static/js/main.86aa5a5d.js"
+  ]
+}
