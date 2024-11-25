@@ -1,0 +1,77 @@
+.general {
+    width: 45%; /* Ширина компонента */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #3d2c43; /* Основной цвет текста */
+  }
+  
+  .general h2 {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #c05ce5; /* Цвет заголовка */
+  }
+  
+  .statistics {
+    margin-bottom: 20px; /* Отступ между статистикой и кнопками */
+    font-size: 24px; /* Увеличенный размер текста */
+    color: #4a4a4a;
+  }
+  
+  .statistics .stat-value {
+    font-weight: bold;
+    font-size: 24px; /* Ещё больше для выделения значений */
+    color: #3d2c43; /* Цвет значений */
+  }
+  
+
+  .pool-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .pool-item p {
+    font-size: 16px;
+    color: #4a4a4a;
+    margin-right: 10px;
+    line-height: 1.5; /* Улучшение читаемости текста */
+  }
+  
+  .arrow {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #666; /* Цвет стрелки */
+  }
+  
+  .random-buy-button {
+    background: #e74c3c; /* Красный фон */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease; /* Плавный переход для наведения */
+  }
+  
+  .random-buy-button:hover {
+    background: #c0392b; /* Темно-красный фон при наведении */
+  }
+  
+  .random-grind-button {
+    background: #2ecc71; /* Зеленый фон */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease; /* Плавный переход для наведения */
+  }
+  
+  .random-grind-button:hover {
+    background: #27ae60; /* Темно-зеленый фон при наведении */
+  }

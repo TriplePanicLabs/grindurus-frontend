@@ -1,0 +1,152 @@
+.pools-table-container {
+  width: 100%;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #3d2c43;
+  overflow-x: auto; /* Прокрутка по горизонтали, если таблица шире контейнера */
+  box-sizing: border-box; /* Учитываем padding в общей ширине */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #c556db;
+}
+
+.filters-and-pagination {
+  display: flex; /* Выравнивание в строку */
+  justify-content: space-between; /* Распределение элементов по краям */
+  align-items: center; /* Вертикальное выравнивание по центру */
+  margin-bottom: 20px; /* Отступ между фильтрами и таблицей */
+}
+
+.filters {
+  display: flex; /* Горизонтальное выравнивание поиска */
+  align-items: center;
+  gap: 10px; /* Отступ между элементами */
+}
+
+.network {
+  font-size: 16px;
+}
+
+.filter-button {
+  background-color: #f7e1fc;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  color: #c556db;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 300px; /* Устанавливает фиксированную ширину, если flex не используется */
+}
+
+.search-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.pools-table {
+  width: 100%;
+  border-collapse: separate; /* Меняем с collapse на separate, чтобы закругления работали */
+  border-spacing: 0; /* Убираем промежутки между ячейками */
+  border-radius: 10px; /* Общие закруглённые углы таблицы */
+  overflow: hidden; /* Убираем выход содержимого за границы */
+}
+
+/* Закругления для верхних углов таблицы */
+.pools-table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.pools-table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Закругления для нижних углов таблицы */
+.pools-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.pools-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+
+/* Ячейки таблицы */
+.pools-table th, .pools-table td {
+  padding: 10px;
+  border: 1px solid #ddd; /* Граница ячеек */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.pools-table th{
+  background: #fdf5f9
+}
+
+.pools-table th, .pools-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.network-icon {
+  width: 30px;
+}
+
+.buy-royalty-button {
+  background-color: #f7e1fc;
+  border: none;
+  color: #c556db;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.grind-pool-button {
+  background-color: #3d2c43;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.view-pool-button {
+  background-color: #f5c7fc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex; /* Горизонтальное выравнивание кнопок */
+  align-items: center;
+  gap: 5px; /* Отступ между кнопками */
+}
+
+.pagination button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination .active-page {
+  font-weight: bold;
+  color: #c556db;
+}

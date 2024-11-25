@@ -1,0 +1,98 @@
+.header {
+  max-width: 80%; /* Максимальная ширина хедера */
+  width: 100%; /* Занимает всю доступную ширину до 1200px */
+  margin: 0 auto; /* Центрирование хедера */
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Учитываем padding в ширине */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  margin-right: 15px;
+}
+
+.dashboard-button {
+  background: none;
+  border: none;
+  color: #d354f8;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 20px;
+  text-decoration: none;
+  position: relative; /* Для работы с псевдоэлементом */
+}
+
+.dashboard-button::after {
+  content: ''; /* Создаём пустой элемент */
+  position: absolute;
+  bottom: -10px; /* Расположение линии ниже кнопки */
+  left: 0;
+  width: 0; /* Начальная ширина линии */
+  height: 2px; /* Толщина линии */
+  background: #d354f8; /* Цвет линии */
+}
+
+.network-logo {
+  width: 30px;
+  height: 30px;
+}
+
+.dashboard-button:hover::after,
+.dashboard-button:focus::after {
+  width: 100%; /* Линия растягивается на всю ширину кнопки */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.network-select select {
+  padding: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 4px solid #ddd;
+  border-radius: 5px;
+  background: #f9f9f900;
+  cursor: pointer;
+}
+
+.token-info {
+  display: flex;
+  align-items: center;
+}
+
+.token-icon {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.token-price {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.connect-wallet {
+  background: #d354f8;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
