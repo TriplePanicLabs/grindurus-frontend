@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./PoolsTable.css";
 import logoArbitrum from "../../assets/images/logoArbitrum.png";
 
-function PoolsTable() {
+function PoolsTable({ onViewPool }) {
   const [currentPage, setCurrentPage] = useState(2);
+  const [poolId, setPoolId] = useState(-1)
 
-  // Пример данных для таблицы
   const tableData = [
     {
       networkIcon: logoArbitrum, // Путь к иконке
@@ -33,6 +33,11 @@ function PoolsTable() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const handleViewPool = (poolId) => {
+    setPoolId(poolId)
+    // onViewPool(poolId)
+  }
 
   return (
     <div className="pools-table-container">
@@ -92,8 +97,8 @@ function PoolsTable() {
                 <button className="grind-pool-button">Grind Pool</button>
               </td>
               <td>
-                <button className="view-pool-button">
-                  View Pool →
+                <button className="view-pool-button" onClick={() => handleViewPool(row.poolId)}>
+                  View Pool
                 </button>
               </td>
             </tr>

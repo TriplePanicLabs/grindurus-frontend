@@ -4,22 +4,49 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрирование относительно ширины экрана */
+  align-items: center;
   box-sizing: border-box;
 }
 
-/* Контент, который выровнен относительно Header */
-.content {
+.dashboard-content {
   position: relative;
   width: 100%;
-  max-width: 80%; /* Совпадает с шириной хедера */
-  margin-top: 60px; /* Отступ ниже хедера */
-  display: flex; /* Flexbox для горизонтального расположения */
-  justify-content: space-between; /* Разделение элементов: General слева, MintNFTPool справа */
-  align-items: flex-start; /* Выровнено по верхнему краю */
-  padding: 0 20px; /* Отступы по бокам */
+  max-width: 80%;
+  margin-top: 15px;
+  margin-bottom: 190px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
   box-sizing: border-box;
 }
+
+.greth-content {
+  position: relative;
+  width: 100%;
+  max-width: 80%;
+  margin-top: 15px;
+  margin-bottom: 190px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.grinder-content {
+  position: relative;
+  width: 100%;
+  max-width: 80%;
+  margin-top: 15px;
+  margin-bottom: 190px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 
 body {
   background-color: #f9f4f6; /* Нежно-розовый цвет */

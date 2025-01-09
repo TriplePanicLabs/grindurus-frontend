@@ -4,24 +4,22 @@ import './MintPoolNFT.css';
 import logoUSDT from '../../assets/images/logoUSDT.png';
 import logoUSDC from '../../assets/images/logoUSDC.png';
 import logoWETH from '../../assets/images/logoWETH.png';
+import logoWBTC from '../../assets/images/logoWETH.png';
 
 
 function MintPoolNFT() {
   const [strategiesId, setStrategiesId] = useState(0);
   const [quoteTokenId, setQuoteTokenId] = useState(0);
   const [baseTokenId, setBaseTokenId] = useState(0);
-  const [quoteTokenAmount, setquoteTokenAmount] = useState('');
+  const [quoteTokenAmount, setQuoteTokenAmount] = useState('');
 
   const arbitrum = {
-    grindURUSPoolsNFT: '',
+    poolsNFT: '',
     strategies: [
       {
         strategyId: 1,
+        network: 'arbitrum',
         description: 'AAVEv3 + UniswapV3',
-      },
-      {
-        strategyId: 2,
-        description: 'AAVEv3 + UniswapV4',
       },
     ],
     quoteTokens:[
@@ -30,21 +28,13 @@ function MintPoolNFT() {
         address: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', // USDT
         decimals: 6, 
         iconURL: logoUSDT, 
-        feeToken: { 
-          symbol: 'WETH',
-          quoteToken: 'USDT',
-          address: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
-          decimals: 18, 
-          iconURL: logoWETH, 
-          oracleQuoteTokenPerFeeToken: '0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612', // chainlink oracleWethUsdArbitrum
-        },
         baseTokens: [
           { 
             symbol: 'WETH',
             quoteToken: 'USDT', // dependency
             address: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
             decimals: 18, 
-            iconURL: '', 
+            iconURL: logoWETH, 
             oracleQuoteTokenPerBaseToken: '0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612', // chainlink oracleWethUsdArbitrum
           },
           {
@@ -61,19 +51,15 @@ function MintPoolNFT() {
         address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', 
         decimals: 18, 
         iconURL: logoUSDC,
-        feeToken: { 
-          symbol: 'WETH',
-          quoteToken: 'USDC',
-          address: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
-          decimals: 18, 
-          iconURL: logoWETH, 
-          oracleQuoteTokenPerFeeToken: '0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612', // chainlink oracleWethUsdArbitrum
-        },
         baseTokens: []
       },
     ],
   
   };
+
+  const handleMaxDepositQuoteToken = () => {
+    setQuoteTokenAmount(100500)
+  }
 
   const handleApprove = async () => {
     if (!window.ethereum) {
@@ -102,7 +88,7 @@ function MintPoolNFT() {
       // Вызываем транзакцию approve
       const tx = await tokenContract.approve(spenderAddress, amount);
 
-      console.log("Approve transaction sent:", tx.hash);
+      // console.log("Approve transaction sent:", tx.hash);
 
       // Ожидаем подтверждение транзакции
       await tx.wait();
@@ -125,15 +111,14 @@ function MintPoolNFT() {
       const signer = await provider.getSigner();
 
       const grindURUSPoolsNFTAddress = arbitrum.grindURUSPoolsNFT
+      const strategyId = arbitrum.strategies[strategiesId].strategyId
       const quoteToken = arbitrum.quoteTokens[quoteTokenId];
       const baseToken = quoteToken.baseTokens[baseTokenId];
-      const feeToken = quoteToken.feeToken
-      const strategyId = arbitrum.strategies[strategiesId].strategyId
 
       const grindURUSPoolsNFTContract = new ethers.Contract(
         grindURUSPoolsNFTAddress,
         [
-          "function mint(uint16 strategyId,address oracleQuoteTokenPerFeeToken,address oracleQuoteTokenPerBaseToken,address feeToken,address baseToken,address quoteToken,uint256 quoteTokenAmount)", // ABI метода mint
+          "function mint(uint16 strategyId,address quoteToken,address baseToken,uint256 quoteTokenAmount)", // ABI метода mint
         ],
         signer
       );
@@ -142,12 +127,9 @@ function MintPoolNFT() {
       console.log(strategyId)
       const tx = await grindURUSPoolsNFTContract.mint(
         strategyId,
-        feeToken.oracleQuoteTokenPerFeeToken,
-        baseToken.oracleQuoteTokenPerBaseToken,
-        feeToken.address,
-        baseToken.address,
         quoteToken.address,
-        quoteTokenAmount
+        baseToken.address,
+        amount
       );
 
       console.log("Approve transaction sent:", tx.hash);
@@ -157,7 +139,7 @@ function MintPoolNFT() {
       alert("Approve successful!");
     } catch (error) {
       console.error("Error during approve:", error);
-      alert("Failed to approve tokens.");
+      // alert("Failed to approve tokens.");
     }
   };
 
@@ -165,49 +147,89 @@ function MintPoolNFT() {
     <div className="mint-nft-pool">
       <h2>Mint Your Strategy Pool NFT</h2>
       <div className="form-group">
-        <label>Strategy</label>
-        <select 
-          value={strategiesId} 
-          onChange={(e) => setStrategiesId(e.target.value)}>
-            {arbitrum.strategies.map((strategyInfo, index) => (
-            <option key={index} value={index}>
-              {strategyInfo.strategyId}) {strategyInfo.description}
-            </option>
-            ))}
-        </select>
+        <div className="label-container">
+            Strategy
+        </div>
+        <div className="select-with-icon">
+          <select 
+            value={strategiesId} 
+            onChange={(e) => setStrategiesId(e.target.value)}>
+              {arbitrum.strategies.map((strategyInfo, index) => (
+              <option key={index} value={index}>
+                {strategyInfo.strategyId}) {strategyInfo.description}
+              </option>
+              ))}
+          </select>
+        </div>
       </div>
       <div className="form-group">
-        <label>Quote Token</label>
-        <select 
-            value={quoteTokenId} 
-            onChange={(e) => {setQuoteTokenId(e.target.value)}}>
+        <div className="label-container">
+          Quote Token
+        </div>
+        <div className="select-with-icon">
+          <img
+            src={arbitrum.quoteTokens[quoteTokenId].iconURL}
+            alt={arbitrum.quoteTokens[quoteTokenId].symbol}
+            className="token-icon"
+          />
+          <select
+            value={quoteTokenId}
+            onChange={(e) => setQuoteTokenId(e.target.value)}
+          >
             {arbitrum.quoteTokens.map((tokenInfo, index) => (
+              <option key={index} value={index}>
+                {tokenInfo.symbol}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="form-group">
+        <div className="label-container">
+          Base Token
+        </div>
+        <div className="select-with-icon">
+        <img
+          src={arbitrum.quoteTokens[quoteTokenId].baseTokens[baseTokenId]?.iconURL}
+          alt={arbitrum.quoteTokens[quoteTokenId].baseTokens[baseTokenId]?.symbol}
+          className="token-icon"
+        />
+        <select
+          value={baseTokenId}
+          onChange={(e) => setBaseTokenId(e.target.value)}
+        >
+          {arbitrum.quoteTokens[quoteTokenId].baseTokens.map((tokenInfo, index) => (
             <option key={index} value={index}>
-              <img src={tokenInfo.logoURL} alt="asd"/> {tokenInfo.symbol}
+              {tokenInfo.symbol}
             </option>
           ))}
         </select>
       </div>
-      <div className="form-group">
-        <label>Base Token</label>
-        <select 
-            value={baseTokenId} 
-            onChange={(e) => setBaseTokenId(e.target.value)}>
-            {arbitrum.quoteTokens[quoteTokenId].baseTokens.map((tokenInfo, index) => (
-            <option key={index} value={index}>
-              {tokenInfo.symbol}
-            </option>
-            ))}
-        </select>
       </div>
       <div className="form-group">
-        <label>Quote Token Amount</label>
-        <input
-          type="number"
-          value={quoteTokenAmount}
-          onChange={(e) => setquoteTokenAmount(e.target.value)}
-          placeholder="100500`"
-        />
+        <div className="label-container">
+          Deposit Quote Token
+        </div>
+        <div className="input-with-max">
+          <img
+            src={arbitrum.quoteTokens[quoteTokenId].iconURL}
+            alt={arbitrum.quoteTokens[quoteTokenId].symbol}
+            className="token-icon"
+          />
+          <input
+            value={quoteTokenAmount}
+            onChange={(e) => setQuoteTokenAmount(e.target.value)}
+            placeholder="100500"
+            className="input-field"
+          />
+          <button
+            type="button"
+            className="max-button"
+            onClick={() => handleMaxDepositQuoteToken('100500')}
+          >
+            MAX
+          </button>
+        </div>
       </div>
       <div className="button-group">
         <button className="approve-button" onClick={handleApprove}>

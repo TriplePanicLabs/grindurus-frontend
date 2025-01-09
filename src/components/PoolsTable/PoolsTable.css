@@ -63,7 +63,7 @@ h2 {
   overflow: hidden; /* Убираем выход содержимого за границы */
 }
 
-/* Закругления для верхних углов таблицы */
+/* Roundings for the top corners of the table */
 .pools-table thead tr:first-child th:first-child {
   border-top-left-radius: 10px;
 }
@@ -71,7 +71,7 @@ h2 {
   border-top-right-radius: 10px;
 }
 
-/* Закругления для нижних углов таблицы */
+/* Roundings for the bottom corners of the table */
 .pools-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
 }
@@ -108,7 +108,8 @@ h2 {
   border: none;
   color: #c556db;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px 10px; /* Увеличиваем отступы */
+  font-weight: bold; /* Делаем текст жирным */
   font-size: 14px;
   cursor: pointer;
 }
@@ -118,9 +119,12 @@ h2 {
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 10px 10px; /* Увеличиваем отступы */
+  font-size: 16px; /* Увеличиваем размер текста */
+  font-weight: bold; /* Делаем текст жирным */
   cursor: pointer;
+  min-width: 90px; /* Устанавливаем минимальную ширину */
+  text-align: center; /* Центрируем текст */
 }
 
 .view-pool-button {
@@ -128,9 +132,12 @@ h2 {
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 10px 10px; /* Увеличиваем отступы */
+  font-size: 16px; /* Увеличиваем размер текста */
+  font-weight: bold; /* Делаем текст жирным */
   cursor: pointer;
+  min-width: 90px; /* Устанавливаем минимальную ширину */
+  text-align: center; /* Центрируем текст */
 }
 
 .pagination {

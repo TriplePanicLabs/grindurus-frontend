@@ -14,13 +14,14 @@
 .mint-nft-pool h2 {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin-top: 0px;
     color: #333;
     text-align: center;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
@@ -33,6 +34,36 @@
 .form-group select,
 .form-group input {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.label-container {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #515151;
+}
+
+.select-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Расстояние между иконкой и select */
+  }
+  
+.select-with-icon .token-icon {
+width: 24px;
+height: 24px;
+object-fit: contain;
+}
+
+.select-with-icon select {
+    /*flex: 1; /* Занимает оставшееся пространство */
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -75,4 +106,35 @@
     font-size: 20px;
     font-weight: bolt;
     color: #006f16;
+}
+
+.input-with-max {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+.input-field {
+    flex: 1;
+    padding: 8px 40px 8px 10px; /* Добавляем отступ справа для кнопки */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.max-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    
+    background: none;
+    border: none;
+    color: #1f1f1f;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.max-button:hover {
+    text-decoration: underline;
 }
