@@ -2,9 +2,6 @@
   width: 100%;
   padding: 20px;
   font-family: Arial, sans-serif;
-  color: #3d2c43;
-  overflow-x: auto; /* Прокрутка по горизонтали, если таблица шире контейнера */
-  box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
 h2 {

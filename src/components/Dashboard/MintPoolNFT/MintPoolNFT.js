@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {ethers} from 'ethers';
 import './MintPoolNFT.css';
-import logoUSDT from '../../assets/images/logoUSDT.png';
-import logoUSDC from '../../assets/images/logoUSDC.png';
-import logoWETH from '../../assets/images/logoWETH.png';
-import logoWBTC from '../../assets/images/logoWETH.png';
+import logoUSDT from '../../../assets/images/logoUSDT.png';
+import logoUSDC from '../../../assets/images/logoUSDC.png';
+import logoWETH from '../../../assets/images/logoWETH.png';
+import logoWBTC from '../../../assets/images/logoWETH.png';
 
 
 function MintPoolNFT() {
@@ -145,7 +145,7 @@ function MintPoolNFT() {
 
   return (
     <div className="mint-nft-pool">
-      <h2>Mint Your Strategy Pool NFT</h2>
+      <div className='mint-nft-label'>Mint Pool NFT</div>
       <div className="form-group">
         <div className="label-container">
             Strategy
@@ -236,7 +236,7 @@ function MintPoolNFT() {
           Approve Quote Token
         </button>
         <button className="mint-button" onClick={handleMint}>
-          Mint Strategy Pool
+          Mint Pool
         </button>
       </div>
     </div>

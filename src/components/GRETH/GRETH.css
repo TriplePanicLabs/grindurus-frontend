@@ -1,0 +1,13 @@
+.greth-container {
+  display: flex;
+  width: 80%;
+  margin-top: 30px;
+}
+    
+.greth-container-left {
+  flex: 1;
+}
+
+.greth-container-right {
+  flex: 1;
+}

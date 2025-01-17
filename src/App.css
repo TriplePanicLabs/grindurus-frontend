@@ -21,6 +21,32 @@
   box-sizing: border-box;
 }
 
+.pool-section {
+  display: flex; /* Используем Flexbox */
+  justify-content: space-between; /* Равномерное распределение компонентов */
+  align-items: flex-start; /* Выравнивание по верху */
+  gap: 20px; /* Расстояние между PoolInfo и PoolInteractor */
+  width: 100%; /* Занять всю ширину */
+}
+
+.pool-info {
+  flex: 1; /* Занимает одну часть от доступного пространства */
+  max-width: 48%; /* Ограничение ширины до 48% */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  padding: 20px; /* Внутренние отступы */
+  background-color: #ffffff; /* Белый фон */
+  border-radius: 8px; /* Закругленные углы */
+}
+
+.pool-interactor {
+  flex: 1; /* Занимает одну часть от доступного пространства */
+  max-width: 48%; /* Ограничение ширины до 48% */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  padding: 20px; /* Внутренние отступы */
+  background-color: #ffffff; /* Белый фон */
+  border-radius: 8px; /* Закругленные углы */
+}
+
 .greth-content {
   position: relative;
   width: 100%;
@@ -47,18 +73,46 @@
   box-sizing: border-box;
 }
 
+.info-intent-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* Отступ между блоками */
+  width: 100%; /* Занимает всю ширину */
+  max-width: 80%; /* Ограничение по ширине */
+  margin: 0 auto; /* Центрирование контейнера */
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+/* Обертка для PlanInfo */
+.plan-info-wrapper {
+  flex: 1; /* Занимает равное пространство */
+  max-width: 48%; /* Ограничение по ширине */
+}
+
+/* Обертка для MintIntent */
+.mint-intent-wrapper {
+  flex: 1; /* Занимает равное пространство */
+  max-width: 48%; /* Ограничение по ширине */
+}
+
+.intents-table-wrapper {
+  margin-top: 20px;
+}
+
+.table-section {
+  width: 80%;
+  margin-top: 0px;
+  padding: 0px;
+  background-color: #ffffff; /* Белый фон для таблицы */
+  border-radius: 8px; /* Закруглённые углы */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
+  
+}
 
 body {
   background-color: #f9f4f6; /* Нежно-розовый цвет */
   margin: 0;
   font-family: Arial, sans-serif;
-}
-
-.table-section {
-  width: 80%;
-  margin-top: 40px;
-  padding: 0px;
-  background-color: #ffffff; /* Белый фон для таблицы */
-  border-radius: 8px; /* Закруглённые углы */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import './NoAgent.css';
+import './NoAgentPlan.css';
 
-function NoAgent() {
+function NoAgentPlan() {
   return (
     <div className="product-card">
       <div className="product-content">
@@ -21,4 +21,4 @@ function NoAgent() {
   );
 }
 
-export default NoAgent;
+export default NoAgentPlan;

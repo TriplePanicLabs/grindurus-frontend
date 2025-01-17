@@ -1,0 +1,25 @@
+.general {
+    width: 100%; /* Ширина компонента */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #3d2c43; /* Основной цвет текста */
+  }
+  
+  .general h2 {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #c05ce5; /* Цвет заголовка */
+  }
+  
+  .statistics {
+    margin-bottom: 20px; /* Отступ между статистикой и кнопками */
+    font-size: 24px; /* Увеличенный размер текста */
+    color: #4a4a4a;
+  }
+  
+  .statistics .stat-value {
+    font-weight: bold;
+    font-size: 24px; /* Ещё больше для выделения значений */
+    color: #3d2c43; /* Цвет значений */
+  }

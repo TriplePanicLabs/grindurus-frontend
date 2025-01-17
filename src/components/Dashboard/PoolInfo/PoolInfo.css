@@ -1,0 +1,25 @@
+.pool-info-container {
+  flex: 1;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #3d2c43; /* Основной цвет текста */
+  border-radius: 8px;
+  /* background: white; */
+}
+
+.pool-info-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #551a8b; /* Акцентный цвет */
+}
+
+.pool-info-list p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #4a4a4a;
+}
+
+.pool-info-list p strong {
+  color: #3d2c43; /* Цвет ключевого текста */
+}

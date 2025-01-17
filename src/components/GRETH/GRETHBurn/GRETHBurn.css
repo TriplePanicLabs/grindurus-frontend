@@ -1,0 +1,85 @@
+/* GRETHBurn.css */
+.greth-burn {
+  width: 100%; /* Фиксированная ширина окна */
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+    
+.greth-burn-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.exchange-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.max-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #eaeaea;
+  border: none;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.max-button:hover {
+  background-color: #d4d4d4;
+}
+
+.estimated-text {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: left;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

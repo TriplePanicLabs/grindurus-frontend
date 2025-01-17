@@ -1,17 +1,13 @@
 /* GRETHInfo.css */
 .greth-info-container {
-  flex: 1;
-  width: 45%; /* Ширина компонента */
-  padding: 20px;
+  width: 100%; /* Ширина компонента */
   font-family: Arial, sans-serif;
   color: #3d2c43; /* Основной цвет текста */
 }
 
 .info-card {
   flex: 1;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+
   overflow: hidden;
 }
 

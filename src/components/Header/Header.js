@@ -7,7 +7,7 @@ import logoPolygon from '../../assets/images/logoPolygon.png';
 import logoOptimism from '../../assets/images/logoOptimism.png';
 import logoBase from '../../assets/images/logoBase.png';
 
-function Header({ onWalletConnect , setView }) {
+function Header({ onWalletConnect , setView, setPoolId }) {
 
   const [selectedNetworkId, setSelectedNetwork] = useState(0);
   const [walletAddress, setWalletAddress] = useState('');
@@ -67,6 +67,9 @@ function Header({ onWalletConnect , setView }) {
   };
 
   const handleHeaderClick = async (view) => {
+    if (view == 'dashboard') {
+      setPoolId(-1)
+    }
     setView(view);
   }
 

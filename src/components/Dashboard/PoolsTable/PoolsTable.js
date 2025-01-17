@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import "./PoolsTable.css";
-import logoArbitrum from "../../assets/images/logoArbitrum.png";
+import logoArbitrum from "../../../assets/images/logoArbitrum.png";
 
-function PoolsTable({ onViewPool }) {
+function PoolsTable({ setPoolId }) {
   const [currentPage, setCurrentPage] = useState(2);
-  const [poolId, setPoolId] = useState(-1)
 
   const tableData = [
     {
       networkIcon: logoArbitrum, // Путь к иконке
       poolId: 1,
-      strategyId: 2,
       quoteToken: "150 USDT + 0.1 ETH",
       yieldProfit: "1.5 USDT + 0.0001 ETH",
       tradeProfit: "5.8 USDT + 0.004 ETH",
@@ -36,7 +34,6 @@ function PoolsTable({ onViewPool }) {
 
   const handleViewPool = (poolId) => {
     setPoolId(poolId)
-    // onViewPool(poolId)
   }
 
   return (
@@ -70,7 +67,7 @@ function PoolsTable({ onViewPool }) {
         <thead>
           <tr>
             <th>Network</th>
-            <th>Pool ID<br />Strategy ID</th>
+            <th>Pool ID</th>
             <th>Quote Token + Base Token</th>
             <th>Yield Profit + Trade Profit</th>
             <th>APR</th>
@@ -83,7 +80,7 @@ function PoolsTable({ onViewPool }) {
           {tableData.map((row, index) => (
             <tr key={index}>
               <td><img src={row.networkIcon} alt="Network Icon" className="network-icon" /></td>
-              <td>{row.poolId}<br />{row.strategyId}</td>
+              <td>{row.poolId}</td>
               <td>{row.quoteToken}</td>
               <td>{row.yieldProfit}<br />{row.tradeProfit}</td>
               <td>{row.apr}</td>

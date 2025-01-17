@@ -1,0 +1,19 @@
+.main-container {
+  display: flex;
+  width: 80%;
+  margin-top: 30px;
+}
+  
+.main-container-left {
+  flex: 1;
+}
+
+.main-container-right {
+  flex: 1;
+}
+
+
+.pools-table-wrapper {
+  display: flex;
+  width: 80%;
+}

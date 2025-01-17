@@ -1,0 +1,51 @@
+.intents-table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #3d2c43;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .table-title { 
+
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #551a8b;
+    margin-bottom: 20px;
+  }
+  
+  .intents-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .intents-table th,
+  .intents-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  .intents-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #551a8b;
+  }
+  
+  .intents-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .intents-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .intents-table td {
+    color: #4a4a4a;
+  }

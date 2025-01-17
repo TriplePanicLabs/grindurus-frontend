@@ -1,0 +1,41 @@
+.grinderai-deposit-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  color: #3d2c43;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grinderai-label {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 55, 232);
+}
+
+.grinderai-fill {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgb(239, 95, 222);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.grinderai-fill:disabled {
+  cursor: not-allowed;
+}
+
+.grinderai-fill:hover {
+  background-color: rgb(200, 45, 180);
+}

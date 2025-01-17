@@ -16,9 +16,10 @@ function GRETHBurn() {
   };
 
   return (
-    <div className="exchange-card">
-      <div className="card-content">
-        <h2 className="card-title">You can exchange grETH to token</h2>
+    <div className="greth-burn">
+        <div className="greth-burn-title">
+          You can exchange grETH to token
+        </div>
         <form onSubmit={handleSubmit} className="exchange-form">
           <div className="form-group">
             <label htmlFor="burn-amount">grETH to burn</label>
@@ -61,7 +62,6 @@ function GRETHBurn() {
             Burn
           </button>
         </form>
-      </div>
     </div>
   );
 }

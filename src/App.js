@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import General from './components/General/General';
-import MintPoolNFT from './components/MintPoolNFT/MintPoolNFT';
-import PoolsTable from "./components/PoolsTable/PoolsTable";
-import GRETHInfo from './components/GRETHInfo/GRETHInfo';
-import GRETHBurn from './components/GRETHBurn/GRETHBurn';
-import FreePlan from './components/NoAgent/NoAgent';
-import GrinderAIAgent from './components/GrinderAIAgent/GrinderAIAgent';
-import GrinderAIAgentPlus from './components/GrinderAIAgentPlus/GrinderAIAgentPlus';
+import GRETH from './components/GRETH/GRETH.js';
+import FreePlan from './components/GrinderAIAgent/NoAgentPlan/NoAgentPlan.js';
+import PlanInfo from './components/GrinderAIAgent/GrinderAIDeposit/GrinderAIDeposit.js';
+import MintIntent from './components/GrinderAIAgent/MintIntent/MintIntent.js';
+import IntentsTable from './components/GrinderAIAgent/IntentsTable/IntentsTable.js';
+import Dashboard from './components/Dashboard/Dashboard.js';
+import GrinderAIAgent from './components/GrinderAIAgent/GrinderAIAgent.js';
 
 function App() {
 
   const [selectedChainId, setSelectedChainId] = useState(0);
   const [walletAddress, setWalletAddress] = useState('');
   const [view, setView] = useState('dashboard');
+  const [poolId, setPoolId] = useState(-1)
+  const [plan, setPlan] = useState(0)
 
   const onWalletConnect = (address, chainId) => {
     setWalletAddress(address);
@@ -25,35 +26,38 @@ function App() {
     switch (view) {
       case 'dashboard':
         return (
-          <>
-            <div className="dashboard-content">
-              <General />
-              <MintPoolNFT />  
-            </div>
-            <div className="table-section">
-              <PoolsTable />
-            </div>
-        </>
+            <Dashboard poolId={poolId} setPoolId={setPoolId} />
         );
       case 'greth':
         return(
           <>
-            <div className="greth-content">
-              <GRETHInfo />
-              <GRETHBurn />
-            </div>
+            <GRETH />
           </>
         )
       case 'grinder':
-        return(
+        return (
+          // <>
+          //   <div className="grinder-content">
+          //     <FreePlan />
+          //     <GrinderAIAgent />
+          //     <GrinderAIAgentPlus />
+          //   </div>
+          //   <div className="info-intent-container">
+          //     <div className="plan-info-wrapper">
+          //       <PlanInfo />
+          //     </div>
+          //     <div className="mint-intent-wrapper">
+          //       <MintIntent />
+          //     </div>
+          //   </div>
+          //   <div className="intents-table-wrapper">
+          //     <IntentsTable />
+          //   </div>
+          // </>
           <>
-            <div className='grinder-content'>
-              <FreePlan />
-              <GrinderAIAgent />
-              <GrinderAIAgentPlus />
-            </div>
+            <GrinderAIAgent />
           </>
-        )
+        );
       case 'profile':
         return(
           <>
@@ -69,7 +73,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header onWalletConnect={onWalletConnect} setView={setView} />      
+      <Header onWalletConnect={onWalletConnect} setView={setView} setPoolId={setPoolId} />      
       {renderContent()}
     </div>
   );

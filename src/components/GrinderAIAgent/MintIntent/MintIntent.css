@@ -1,0 +1,81 @@
+.mint-intent-container {
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #3d2c43;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mint-intent-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #551a8b;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.slider {
+  width: 100%;
+}
+
+.slider-value {
+  text-align: right;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #4a4a4a;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 1rem;
+}
+
+.price-label {
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+.price-value {
+  color: #551a8b;
+  font-weight: bold;
+}
+
+.mint-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #ff69b4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mint-button:hover {
+  background-color: #ff4081;
+}
