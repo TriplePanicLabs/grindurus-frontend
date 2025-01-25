@@ -7,33 +7,41 @@ import PoolInfo from './PoolInfo/PoolInfo.js';
 import PoolInteractor from './PoolInteractor/PoolInteractor.js';
 import PoolsTable from './PoolsTable/PoolsTable.js';
 
-function Dashboard({ poolId, setPoolId}) {
+function Dashboard({ poolId, setPoolId, networkConfig}) {
     return (
         <>
           <div className='main-container'>
             {poolId === -1 ? (
               <>
                 <div className='main-container-left'>
-                  <General />
+                  <General networkConfig={networkConfig} />
                 </div>
                 <div className='main-container-right'>
-                  <MintPoolNFT />
+                  <MintPoolNFT networkConfig={networkConfig} />
                 </div>
+               
               </>
             ) : (
               <>
                 <div className='main-container-left'>
-                  <PoolInfo />
+                  <PoolInfo poolId={poolId} networkConfig={networkConfig}/>
                 </div>
                 <div className='main-container-right'>
-                  <PoolInteractor />
+                  <PoolInteractor poolId={poolId} networkConfig={networkConfig} />
                 </div>
               </>
             )}
           </div>
-          <div className="pools-table-wrapper">
-            <PoolsTable setPoolId={setPoolId} />
-          </div>
+          {poolId == -1 ? (
+            <div className="pools-table-wrapper">
+              <PoolsTable setPoolId={setPoolId} networkConfig={networkConfig} />
+            </div>
+          ) : (
+            <div>
+              {/* empty */}
+            </div>
+          )
+          }
         </>
       );
 

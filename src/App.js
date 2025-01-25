@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import config from './config';
 import Header from './components/Header/Header';
 import GRETH from './components/GRETH/GRETH.js';
 import FreePlan from './components/GrinderAIAgent/NoAgentPlan/NoAgentPlan.js';
@@ -11,22 +12,35 @@ import GrinderAIAgent from './components/GrinderAIAgent/GrinderAIAgent.js';
 
 function App() {
 
-  const [selectedChainId, setSelectedChainId] = useState(0);
+  const [chainId, setChainId] = useState('');
+  const [networkConfig, setNetworkConfig] = useState({});
   const [walletAddress, setWalletAddress] = useState('');
   const [view, setView] = useState('dashboard');
   const [poolId, setPoolId] = useState(-1)
   const [plan, setPlan] = useState(0)
 
-  const onWalletConnect = (address, chainId) => {
+  const onWalletConnect = (address, newChainId) => {
     setWalletAddress(address);
-    setSelectedChainId(chainId);
+    setChainId(newChainId);
+    findAndSetNetworkConfig(newChainId); 
+  };
+
+  const findAndSetNetworkConfig = (updatedChainId) => {
+    const chainToUse = updatedChainId || chainId;
+    const networkKey = Object.keys(config).find(
+      (key) => config[key].chainId && config[key].chainId.toLowerCase() === chainToUse.toLowerCase()
+    );
+    setNetworkConfig(config[networkKey] || {});
   };
 
   const renderContent = () => {
+    if (!networkConfig || Object.keys(networkConfig).length === 0) {
+      return <div>Loading network configuration...</div>;
+    }
     switch (view) {
       case 'dashboard':
         return (
-            <Dashboard poolId={poolId} setPoolId={setPoolId} />
+            <Dashboard poolId={poolId} setPoolId={setPoolId} networkConfig={networkConfig} />
         );
       case 'greth':
         return(
@@ -36,24 +50,6 @@ function App() {
         )
       case 'grinder':
         return (
-          // <>
-          //   <div className="grinder-content">
-          //     <FreePlan />
-          //     <GrinderAIAgent />
-          //     <GrinderAIAgentPlus />
-          //   </div>
-          //   <div className="info-intent-container">
-          //     <div className="plan-info-wrapper">
-          //       <PlanInfo />
-          //     </div>
-          //     <div className="mint-intent-wrapper">
-          //       <MintIntent />
-          //     </div>
-          //   </div>
-          //   <div className="intents-table-wrapper">
-          //     <IntentsTable />
-          //   </div>
-          // </>
           <>
             <GrinderAIAgent />
           </>
@@ -73,7 +69,13 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header onWalletConnect={onWalletConnect} setView={setView} setPoolId={setPoolId} />      
+      <Header 
+        onWalletConnect={onWalletConnect} 
+        setView={setView} 
+        setPoolId={setPoolId} 
+        setChainId={setChainId} 
+        findAndSetNetworkConfig={findAndSetNetworkConfig} 
+      />      
       {renderContent()}
     </div>
   );

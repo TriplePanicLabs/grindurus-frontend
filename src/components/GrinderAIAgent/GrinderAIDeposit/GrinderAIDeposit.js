@@ -17,8 +17,11 @@ function GrinderAIDeposit() {
     poolsNFT: '',
     strategies: [
       {
+        strategyId: 0,
+        description: 'UniswapV3'
+      },
+      {
         strategyId: 1,
-        network: 'arbitrum',
         description: 'AAVEv3 + UniswapV3',
       },
     ],
@@ -41,7 +44,7 @@ function GrinderAIDeposit() {
             symbol: 'WBTC', 
             address: '', // WBTC
             decimals: 6, 
-            iconURL: '', 
+            iconURL: logoWBTC, 
             oracleQuoteTokenPerFeeToken: ''
           }
         ]
@@ -79,7 +82,7 @@ function GrinderAIDeposit() {
 
   const handleApprove = async () => {}
 
-  const handleMint = async () => {}
+  const handleDeposit = async () => {}
   
   const handleMaxDepositQuoteToken = async () => {}
 
@@ -186,7 +189,7 @@ function GrinderAIDeposit() {
         <button className="approve-button" onClick={handleApprove}>
           Approve Quote Token
         </button>
-        <button className="mint-button" onClick={handleMint}>
+        <button className="mint-button" onClick={handleDeposit}>
           Deposit
         </button>
       </div>
