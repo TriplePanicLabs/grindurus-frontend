@@ -67,11 +67,11 @@ function PoolsTable({ setPoolId, networkConfig }) {
       const quoteTokenAmount = ethers.formatUnits(poolNFTInfo.quoteTokenAmount, quoteTokenConfig.decimals);
       const baseTokenAmount = ethers.formatUnits(poolNFTInfo.baseTokenAmount, baseTokenConfig.decimals);
       const quoteTokenYieldProfit = ethers.formatUnits(poolNFTInfo.quoteTokenYieldProfit, quoteTokenConfig.decimals);
-      const baseTokenYieldProfit = ethers.formatUnits(poolNFTInfo.baseTokenYieldProfit, baseTokenConfig.decimals);
+      const baseTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.baseTokenYieldProfit, baseTokenConfig.decimals)).toFixed(baseTokenConfig.decimals);
       const quoteTokenTradeProfit = ethers.formatUnits(poolNFTInfo.quoteTokenTradeProfit, quoteTokenConfig.decimals);
       const baseTokenTradeProfit = ethers.formatUnits(poolNFTInfo.baseTokenTradeProfit, baseTokenConfig.decimals);
-      const aprNumerator = poolNFTInfo.APRNumerator;
-      const aprDenominator = poolNFTInfo.APRDenominator;
+      const aprNumerator = Number(poolNFTInfo.APRNumerator);
+      const aprDenominator = Number(poolNFTInfo.APRDenominator);
       const apr = aprDenominator > 0 ? `${((aprNumerator / aprDenominator) * 100).toFixed(2)}%` : "N/A";
       const royaltyPrice = ethers.formatUnits(poolNFTInfo.royaltyPrice, 18);
 
@@ -85,18 +85,6 @@ function PoolsTable({ setPoolId, networkConfig }) {
         buyRoyaltyPrice: `${royaltyPrice}`,
       };
     })
-    // let tableData = [
-    //   {
-    //     networkIcon: logoArbitrum, // Путь к иконке
-    //     poolId: 0,
-    //     quoteToken: "150 USDT + 0.1 ETH",
-    //     yieldProfit: "1.5 USDT + 0.0001 ETH",
-    //     tradeProfit: "5.8 USDT + 0.004 ETH",
-    //     apr: "105%",
-    //     buyRoyaltyPrice: "1.3 ETH",
-    //   }
-    // ]
-
     return tableData
   }
 
@@ -122,7 +110,13 @@ function PoolsTable({ setPoolId, networkConfig }) {
         signer
       );
 
-      const tx = await poolsNFT.grind(poolId);
+      // console.log(poolsNFT)
+      const estimatedGasLimit = await poolsNFT.grind.estimateGas(poolId);
+      // console.log(estimatedGasLimit)
+      const adjustedGasLimit = estimatedGasLimit * 15n / 10n
+      // console.log(adjustedGasLimit)
+  
+      const tx = await poolsNFT.grind(poolId, {gasLimit: adjustedGasLimit});
       await tx.wait()
 
     } catch (error) {

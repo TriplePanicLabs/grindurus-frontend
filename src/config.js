@@ -12,8 +12,8 @@ const config = {
     name: 'Arbitrum',
     chainId: '0xa4b1',
     logo: logoArbitrum,
-    poolsnft: '0xfC7a86Ab7c0E48F26F3aEe7382eBc6fe313956Db',
-    registry: '0x8BCC8B5Cd7e9E0138896A82E6Db7b55b283EbBcB',
+    poolsnft: '0xe722F1eF83DD78476a28869bA19D129b563D39eE',
+    registry: '0xDf7762C94fdB3B0017a7D037e46EA9612281984d',
     strategies: [
       { 
         id: 0, 
