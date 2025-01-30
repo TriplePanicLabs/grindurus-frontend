@@ -66,10 +66,10 @@ function PoolsTable({ setPoolId, networkConfig }) {
       const baseTokenSymbol = poolNFTInfo.baseTokenSymbol;
       const quoteTokenAmount = ethers.formatUnits(poolNFTInfo.quoteTokenAmount, quoteTokenConfig.decimals);
       const baseTokenAmount = ethers.formatUnits(poolNFTInfo.baseTokenAmount, baseTokenConfig.decimals);
-      const quoteTokenYieldProfit = ethers.formatUnits(poolNFTInfo.quoteTokenYieldProfit, quoteTokenConfig.decimals);
+      const quoteTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.quoteTokenYieldProfit, quoteTokenConfig.decimals)).toFixed(quoteTokenConfig.decimals);
       const baseTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.baseTokenYieldProfit, baseTokenConfig.decimals)).toFixed(baseTokenConfig.decimals);
-      const quoteTokenTradeProfit = ethers.formatUnits(poolNFTInfo.quoteTokenTradeProfit, quoteTokenConfig.decimals);
-      const baseTokenTradeProfit = ethers.formatUnits(poolNFTInfo.baseTokenTradeProfit, baseTokenConfig.decimals);
+      const quoteTokenTradeProfit = parseFloat(ethers.formatUnits(poolNFTInfo.quoteTokenTradeProfit, quoteTokenConfig.decimals)).toFixed(quoteTokenConfig.decimals);
+      const baseTokenTradeProfit = parseFloat(ethers.formatUnits(poolNFTInfo.baseTokenTradeProfit, baseTokenConfig.decimals)).toFixed(baseTokenConfig.decimals);
       const aprNumerator = Number(poolNFTInfo.APRNumerator);
       const aprDenominator = Number(poolNFTInfo.APRDenominator);
       const apr = aprDenominator > 0 ? `${((aprNumerator / aprDenominator) * 100).toFixed(2)}%` : "N/A";
