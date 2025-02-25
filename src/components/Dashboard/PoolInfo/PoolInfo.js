@@ -6,6 +6,8 @@ import './PoolInfo.css';
 function PoolInfo({ poolId, networkConfig }) {
 
   const [poolOwner, setPoolOwner] = useState('')
+  const [oracleQuoteTokenPerBaseToken, setOracleQuoteTokenPerBaseToken] = useState('')
+  const [oracleQuoteTokenPerFeeToken, setOracleQuoteTokenPerFeeToken] = useState('')
   const [royaltyReceiver, setRoyaltyReceiver] = useState('')
   const [quoteToken, setQuoteToken] = useState('')
   const [baseToken, setBaseToken] = useState('')
@@ -48,6 +50,8 @@ function PoolInfo({ poolId, networkConfig }) {
         <h2 className="pool-info-title">Pool Info</h2>
         <div className="pool-info-list">
           <p><strong>Pool ID:</strong> {poolId}</p>
+          <p><strong>Oracle QuoteToken/BaseToken:</strong> {poolId}</p>
+          <p><strong>Oracle QuoteToken/FeeToken:</strong> {poolId}</p>
           <p><strong>Pool Owner:</strong> {poolOwner}</p>
           <p><strong>Royalty Receiver:</strong> {royaltyReceiver}</p>
           <p><strong>QuoteToken:</strong> {quoteToken}</p>

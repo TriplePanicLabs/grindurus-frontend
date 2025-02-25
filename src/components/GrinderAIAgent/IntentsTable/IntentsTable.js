@@ -6,18 +6,12 @@ function IntentsTable() {
     {
       id: 1,
       owner: "0xC185...Dee",
-      plan: "Basic",
-      startPeriod: "2025-01-01",
-      endPeriod: "2025-12-31",
-      paid: "Yes",
+      valid: "2025-12-31",
     },
     {
       id: 2,
       owner: "0xA12B...34C",
-      plan: "Premium",
-      startPeriod: "2024-07-01",
-      endPeriod: "2025-06-30",
-      paid: "No",
+      valid: "2025-06-30",
     },
     // Дополнительные записи...
   ];

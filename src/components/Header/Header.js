@@ -94,7 +94,7 @@ function Header({ onWalletConnect, setView, setPoolId, setChainId, findAndSetNet
     <header className="header">
       <div className="header-left">
         <img src={logoGrindURUS} alt="Logo" className="logo" onClick={() => handleHeaderClick('dashboard')}/>
-        <button className="dashboard-button" onClick={() => handleHeaderClick('dashboard')}>Manual Interaction</button>
+        <button className="dashboard-button" onClick={() => handleHeaderClick('dashboard')}>Dashboard</button>
         <button className="dashboard-button grEth-button" onClick={() => handleHeaderClick('greth')}>grETH</button>
         <button className="dashboard-button grEth-button" onClick={() => handleHeaderClick('grinder')}>Grinder AI Agent</button>
       </div>

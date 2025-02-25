@@ -3,7 +3,7 @@ import './App.css';
 import config from './config';
 import Header from './components/Header/Header';
 import GRETH from './components/GRETH/GRETH.js';
-import FreePlan from './components/GrinderAIAgent/NoAgentPlan/NoAgentPlan.js';
+
 import PlanInfo from './components/GrinderAIAgent/GrinderAIDeposit/GrinderAIDeposit.js';
 import MintIntent from './components/GrinderAIAgent/MintIntent/MintIntent.js';
 import IntentsTable from './components/GrinderAIAgent/IntentsTable/IntentsTable.js';
@@ -51,7 +51,7 @@ function App() {
       case 'grinder':
         return (
           <>
-            <GrinderAIAgent />
+            <GrinderAIAgent networkConfig={networkConfig} />
           </>
         );
       case 'profile':

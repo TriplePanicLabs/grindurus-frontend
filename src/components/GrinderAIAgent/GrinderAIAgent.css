@@ -5,12 +5,26 @@
   gap: 20px;
 }
 
-.grinderai-deposit {
+.grinderai-container-left {
   flex: 1;
 }
 
-.grinderai-intent {
+.grinderai-container-right {
   flex: 1;
+}
+
+.grinder-container-left-title, .grinder-conteiner-right-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(255, 55, 232);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.grinderai-intent {
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
 }
 
 .grinderai-intent-plans {
@@ -18,6 +32,11 @@
   gap: 10px;
   justify-content: space-between;
   align-items: stretch;
+}
+
+.grinderai-intent-mint {
+  width: 100%;
+  margin-top: 10px;
 }
 
 .spinner {
@@ -38,9 +57,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.grinderai-intent-mint {
-  width: 100%;
-  margin-top: 20px;
 }

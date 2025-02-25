@@ -16,6 +16,17 @@
   color: #551a8b;
 }
 
+.mint-intent-description {
+  font-weight: bold;
+  text-align: center;
+  color: #df38b8;
+  margin-bottom: 10px;
+}
+
+.intent-period {
+  margin-bottom: 20px;
+}
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -23,7 +34,19 @@
 .label {
   display: block;
   font-weight: bold;
+  font-size: 20px;
   margin-bottom: 8px;
+}
+
+.receiver-button {
+  margin-left: 10px;
+  width: 30%;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #ff69b4;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .slider {
