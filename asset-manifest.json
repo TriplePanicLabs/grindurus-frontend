@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/grindurus-frontend/static/css/main.26b2d936.css",
-    "main.js": "/grindurus-frontend/static/js/main.cbc8f0eb.js",
+    "main.css": "/grindurus-frontend/static/css/main.12d2a877.css",
+    "main.js": "/grindurus-frontend/static/js/main.9eb42cb2.js",
     "static/js/453.17d47443.chunk.js": "/grindurus-frontend/static/js/453.17d47443.chunk.js",
     "static/media/logoWBTC.png": "/grindurus-frontend/static/media/logoWBTC.78edf81fb179b463fe08.png",
     "static/media/logoGrindURUS.png": "/grindurus-frontend/static/media/logoGrindURUS.80fb8795f568e2e5e239.png",
@@ -13,12 +13,12 @@
     "static/media/logoBase.png": "/grindurus-frontend/static/media/logoBase.e5d127ccc8f237f58ad8.png",
     "static/media/logoWETH.png": "/grindurus-frontend/static/media/logoWETH.1959d178de495d78005b.png",
     "index.html": "/grindurus-frontend/index.html",
-    "main.26b2d936.css.map": "/grindurus-frontend/static/css/main.26b2d936.css.map",
-    "main.cbc8f0eb.js.map": "/grindurus-frontend/static/js/main.cbc8f0eb.js.map",
+    "main.12d2a877.css.map": "/grindurus-frontend/static/css/main.12d2a877.css.map",
+    "main.9eb42cb2.js.map": "/grindurus-frontend/static/js/main.9eb42cb2.js.map",
     "453.17d47443.chunk.js.map": "/grindurus-frontend/static/js/453.17d47443.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.26b2d936.css",
-    "static/js/main.cbc8f0eb.js"
+    "static/css/main.12d2a877.css",
+    "static/js/main.9eb42cb2.js"
   ]
 }
