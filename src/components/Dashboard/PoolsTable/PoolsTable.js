@@ -36,7 +36,9 @@ function PoolsTable({ setPoolId, networkConfig }) {
       if (totalPools > 0) {
         let upPoolId = Number(totalPools) - 1;
         let downPoolId = upPoolId - tableRowsAmount >= 0 ? upPoolId - tableRowsAmount : 0;
-        let poolNFTInfos = await poolsNFT.getPoolNFTInfos(downPoolId, upPoolId);
+        let poolsIds = Array.from({ length: upPoolId - downPoolId + 1 }, (_, i) => downPoolId + i);
+        // console.log(poolsIds) 
+        let poolNFTInfos = await poolsNFT.getPoolNFTInfosBy(poolsIds);
         const tableData = formTabledata(poolNFTInfos)
         setCurrentTableData(tableData)
       }
@@ -64,6 +66,8 @@ function PoolsTable({ setPoolId, networkConfig }) {
 
       const quoteTokenSymbol = poolNFTInfo.quoteTokenSymbol;
       const baseTokenSymbol = poolNFTInfo.baseTokenSymbol;
+      // const oracleQuoteTokenPerFeeToken = poolNFTInfo.oracleQuoteTokenPerFeeToken
+      // const oracleQuoteTokenPerBaseToken = poolNFTInfo.oracleQuoteTokenPerBaseToken
       const quoteTokenAmount = ethers.formatUnits(poolNFTInfo.quoteTokenAmount, quoteTokenConfig.decimals);
       const baseTokenAmount = ethers.formatUnits(poolNFTInfo.baseTokenAmount, baseTokenConfig.decimals);
       const quoteTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.quoteTokenYieldProfit, quoteTokenConfig.decimals)).toFixed(quoteTokenConfig.decimals);

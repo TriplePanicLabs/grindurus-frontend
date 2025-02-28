@@ -12,7 +12,7 @@ const config = {
     name: 'Arbitrum',
     chainId: '0xa4b1',
     logo: logoArbitrum,
-    poolsnft: '0x67479C0EB7dE48A2a480532233623d5233B33295',
+    poolsnft: '0x2B2301dC45550e0900791c952278dd49C3c68607',
     registry: '0x21b111fd6a43C72Ce946A2C9fD7D7ECbc313fbDC',
     intentsnft: '0x6F5A522C76fA20717a2edA165eE47D9F7Df9f0D4',
     strategies: [
@@ -140,12 +140,8 @@ const config = {
         { "name": "poolId", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [
-        {
-          "name": "royaltyPricePaid",
-          "type": "uint256",
-          "internalType": "uint256"
-        },
-        { "name": "refund", "type": "uint256", "internalType": "uint256" }
+        { "name": "", "type": "uint256", "internalType": "uint256" },
+        { "name": "", "type": "uint256", "internalType": "uint256" }
       ],
       "stateMutability": "payable"
     },
@@ -206,11 +202,7 @@ const config = {
           "type": "uint256",
           "internalType": "uint256"
         },
-        {
-          "name": "lastGrinderShare",
-          "type": "uint256",
-          "internalType": "uint256"
-        },
+        { "name": "ownerShare", "type": "uint256", "internalType": "uint256" },
         {
           "name": "oldRoyaltyPrice",
           "type": "uint256",
@@ -252,13 +244,7 @@ const config = {
           "internalType": "uint256"
         }
       ],
-      "outputs": [
-        {
-          "name": "depositedAmount",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -371,147 +357,6 @@ const config = {
     },
     {
       "type": "function",
-      "name": "getPoolNFTInfos",
-      "inputs": [
-        { "name": "fromPoolId", "type": "uint256", "internalType": "uint256" },
-        { "name": "toPoolId", "type": "uint256", "internalType": "uint256" }
-      ],
-      "outputs": [
-        {
-          "name": "poolInfos",
-          "type": "tuple[]",
-          "internalType": "struct IPoolsNFT.PoolNFTInfo[]",
-          "components": [
-            { "name": "poolId", "type": "uint256", "internalType": "uint256" },
-            {
-              "name": "config",
-              "type": "tuple",
-              "internalType": "struct IURUS.Config",
-              "components": [
-                {
-                  "name": "longNumberMax",
-                  "type": "uint8",
-                  "internalType": "uint8"
-                },
-                {
-                  "name": "hedgeNumberMax",
-                  "type": "uint8",
-                  "internalType": "uint8"
-                },
-                {
-                  "name": "extraCoef",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "priceVolatilityPercent",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "initHedgeSellPercent",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "returnPercentLongSell",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "returnPercentHedgeSell",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "returnPercentHedgeRebuy",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                }
-              ]
-            },
-            {
-              "name": "strategyId",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "quoteToken",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "baseToken",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "quoteTokenSymbol",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "baseTokenSymbol",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "quoteTokenAmount",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "baseTokenAmount",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "quoteTokenYieldProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "baseTokenYieldProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "quoteTokenTradeProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "baseTokenTradeProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "APRNumerator",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "APRDenominator",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "activeCapital",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "royaltyPrice",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ]
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
       "name": "getPoolNFTInfosBy",
       "inputs": [
         { "name": "_poolIds", "type": "uint256[]", "internalType": "uint256[]" }
@@ -574,6 +419,17 @@ const config = {
               "name": "strategyId",
               "type": "uint256",
               "internalType": "uint256"
+            },
+            { "name": "pool", "type": "address", "internalType": "address" },
+            {
+              "name": "oracleQuoteTokenPerFeeToken",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "oracleQuoteTokenPerBaseToken",
+              "type": "address",
+              "internalType": "address"
             },
             {
               "name": "quoteToken",
@@ -732,6 +588,8 @@ const config = {
         { "name": "", "type": "uint256", "internalType": "uint256" },
         { "name": "", "type": "uint256", "internalType": "uint256" },
         { "name": "", "type": "uint256", "internalType": "uint256" },
+        { "name": "", "type": "uint256", "internalType": "uint256" },
+        { "name": "", "type": "uint256", "internalType": "uint256" },
         { "name": "", "type": "uint256", "internalType": "uint256" }
       ],
       "stateMutability": "view"
@@ -779,9 +637,7 @@ const config = {
       "inputs": [
         { "name": "poolId", "type": "uint256", "internalType": "uint256" }
       ],
-      "outputs": [
-        { "name": "isGrinded", "type": "bool", "internalType": "bool" }
-      ],
+      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -791,9 +647,7 @@ const config = {
         { "name": "poolId", "type": "uint256", "internalType": "uint256" },
         { "name": "op", "type": "uint8", "internalType": "uint8" }
       ],
-      "outputs": [
-        { "name": "isGrinded", "type": "bool", "internalType": "bool" }
-      ],
+      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -880,15 +734,6 @@ const config = {
     },
     {
       "type": "function",
-      "name": "lastGrinder",
-      "inputs": [],
-      "outputs": [
-        { "name": "", "type": "address", "internalType": "address payable" }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
       "name": "minDeposit",
       "inputs": [
         { "name": "token", "type": "address", "internalType": "address" }
@@ -909,9 +754,7 @@ const config = {
           "internalType": "uint256"
         }
       ],
-      "outputs": [
-        { "name": "poolId", "type": "uint256", "internalType": "uint256" }
-      ],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -1026,13 +869,6 @@ const config = {
     },
     {
       "type": "function",
-      "name": "royaltyGrinderShareNumerator",
-      "inputs": [],
-      "outputs": [{ "name": "", "type": "uint16", "internalType": "uint16" }],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
       "name": "royaltyInfo",
       "inputs": [
         { "name": "tokenId", "type": "uint256", "internalType": "uint256" },
@@ -1057,6 +893,13 @@ const config = {
     },
     {
       "type": "function",
+      "name": "royaltyOwnerShareNumerator",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "uint16", "internalType": "uint16" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
       "name": "royaltyPrice",
       "inputs": [
         { "name": "poolId", "type": "uint256", "internalType": "uint256" }
@@ -1073,7 +916,7 @@ const config = {
     },
     {
       "type": "function",
-      "name": "royaltyPriceGrinderShareNumerator",
+      "name": "royaltyPriceOwnerShareNumerator",
       "inputs": [],
       "outputs": [{ "name": "", "type": "uint16", "internalType": "uint16" }],
       "stateMutability": "view"
@@ -1263,7 +1106,7 @@ const config = {
           "internalType": "uint16"
         },
         {
-          "name": "_royaltyPriceGrinderShareNumerator",
+          "name": "_royaltyPriceOwnerShareNumerator",
           "type": "uint16",
           "internalType": "uint16"
         }
@@ -1291,7 +1134,7 @@ const config = {
           "internalType": "uint16"
         },
         {
-          "name": "_royaltyGrinderShareNumerator",
+          "name": "_royaltyOwnerShareNumerator",
           "type": "uint16",
           "internalType": "uint16"
         }
@@ -1431,6 +1274,16 @@ const config = {
     },
     {
       "type": "function",
+      "name": "transfer",
+      "inputs": [
+        { "name": "to", "type": "address", "internalType": "address" },
+        { "name": "poolId", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "transferFrom",
       "inputs": [
         { "name": "from", "type": "address", "internalType": "address" },
@@ -1464,9 +1317,7 @@ const config = {
           "internalType": "uint256"
         }
       ],
-      "outputs": [
-        { "name": "withdrawn", "type": "uint256", "internalType": "uint256" }
-      ],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -1694,201 +1545,6 @@ const config = {
     },
     {
       "type": "event",
-      "name": "SetBaseURI",
-      "inputs": [
-        {
-          "name": "baseURI",
-          "type": "string",
-          "indexed": false,
-          "internalType": "string"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetFactoryStrategy",
-      "inputs": [
-        {
-          "name": "strategyId",
-          "type": "uint256",
-          "indexed": false,
-          "internalType": "uint256"
-        },
-        {
-          "name": "factoryStrategy",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetGRETHShares",
-      "inputs": [
-        {
-          "name": "_grethGrinderShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_grethReserveShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_grethPoolOwnerShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_grethRoyaltyReceiverShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetMinDeposit",
-      "inputs": [
-        {
-          "name": "token",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "minDeposit",
-          "type": "uint256",
-          "indexed": false,
-          "internalType": "uint256"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetPoolsNFTImage",
-      "inputs": [
-        {
-          "name": "poolsNFTImage",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetRoyaltyPriceShares",
-      "inputs": [
-        {
-          "name": "_royaltyPriceCompensationShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyPriceReserveShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyPricePoolOwnerShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyPriceGrinderShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetRoyaltyShares",
-      "inputs": [
-        {
-          "name": "_poolOwnerRoyaltyShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyReceiverShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyReserveShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "_royaltyGrinderShareNumerator",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetStrategiest",
-      "inputs": [
-        {
-          "name": "strategiest",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "isStrategiest",
-          "type": "bool",
-          "indexed": false,
-          "internalType": "bool"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
-      "name": "SetTokenCap",
-      "inputs": [
-        {
-          "name": "token",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "_tokenCap",
-          "type": "uint256",
-          "indexed": false,
-          "internalType": "uint256"
-        }
-      ],
-      "anonymous": false
-    },
-    {
-      "type": "event",
       "name": "Transfer",
       "inputs": [
         {
@@ -2018,7 +1674,6 @@ const config = {
         { "name": "index", "type": "uint256", "internalType": "uint256" }
       ]
     },
-    { "type": "error", "name": "ExceededDeposit", "inputs": [] },
     { "type": "error", "name": "ExceededDepositCap", "inputs": [] },
     { "type": "error", "name": "InsufficientDeposit", "inputs": [] },
     { "type": "error", "name": "InsufficientRoyaltyPrice", "inputs": [] },
@@ -2027,6 +1682,7 @@ const config = {
     { "type": "error", "name": "InvalidRoyaltyNumerator", "inputs": [] },
     { "type": "error", "name": "InvalidRoyaltyPriceShare", "inputs": [] },
     { "type": "error", "name": "InvalidRoyaltyShares", "inputs": [] },
+    { "type": "error", "name": "NoCapital", "inputs": [] },
     { "type": "error", "name": "NotAgent", "inputs": [] },
     { "type": "error", "name": "NotDepositor", "inputs": [] },
     { "type": "error", "name": "NotOwner", "inputs": [] },

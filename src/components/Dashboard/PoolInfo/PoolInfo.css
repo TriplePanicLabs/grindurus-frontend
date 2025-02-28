@@ -23,3 +23,46 @@
 .pool-info-list p strong {
   color: #3d2c43; /* Цвет ключевого текста */
 }
+
+.positions-table {
+  margin-top: 15px;
+  width: 100%;
+  border-radius: 8px;
+  border-collapse: collapse;
+  table-layout: fixed; /* Фиксированная ширина колонок */
+}
+
+.positions-table th,
+.positions-table td {
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
+  overflow: hidden; /* Обрезка текста */
+  white-space: nowrap; /* Запрет переноса текста */
+  text-overflow: ellipsis; /* Добавление троеточия, если текст обрезан */
+}
+
+.positions-table th {
+  font-size: 20px;
+  color: rgb(255, 103, 103);
+}
+
+.positions-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Установка фиксированной ширины для колонок */
+.positions-table th:first-child,
+.positions-table td:first-child {
+  width: 20%; /* Колонка с параметрами */
+}
+
+.positions-table th:nth-child(2),
+.positions-table td:nth-child(2) {
+  width: 40%; /* Колонка с Long */
+}
+
+.positions-table th:nth-child(3),
+.positions-table td:nth-child(3) {
+  width: 40%; /* Колонка с Hedge */
+}
