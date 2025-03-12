@@ -15,7 +15,6 @@ function PoolInteractor({ poolId, networkConfig }) {
   const [hedgeNumberMax, setHedgeNumberMax] = useState(4);
   const [extraCoef, setExtraCoef] = useState('');
   const [priceVolatilityPercent, setPriceVolatilityPercent] = useState(1);
-  const [initHedgeSellPercent, setInitHedgeSellPercent] = useState(1);
 
   const [selectedOpReturnPercent, setSelectedOpReturnPercent] = useState('1');
   const [inputReturnPercent, setInputReturnPercent] = useState('')
@@ -38,54 +37,38 @@ function PoolInteractor({ poolId, networkConfig }) {
 
       const poolsNFT = new ethers.Contract(
         poolsnftAddress,
-        [
-          "function getConfig(uint256 poolId) external view returns (uint8, uint8, uint256, uint256, uint256, uint256, uint256, uint256)",
-          "function pools(uint256 poolId) external view returns (address)"
-        ],
+        config.poolsNFTAbi,
         signer
       );
-      // console.log(poolId)
-      // console.log(poolAddress)
-      const poolAddress = await poolsNFT.pools(poolId)
-      const pool = new ethers.Contract(
-        poolAddress,
-        [
-          "function getConfig() external view returns (uint8, uint8, uint256, uint256, uint256, uint256, uint256, uint256)",
-          "function feeConfig() external view returns (uint256, uint256, uint256)",
-        ],
-        signer
-      )
+      const poolInfo = await poolsNFT.getPoolNFTInfosBy([poolId]);
+      console.log(poolInfo)
+      
+      const poolConfig = poolInfo[0].config
+      const feeConfig = poolInfo[0].feeConfig
 
-      const poolConfig = await pool.getConfig()    
-      const feeConfig = await pool.feeConfig()
-
-      const poolFeeConfigLongSell = feeConfig[0]
-      const poolFeeConfigHedgeSell = feeConfig[1]
-      const poolFeeConfigHedgeRebuy = feeConfig[2]
+      const poolFeeConfigLongSell = feeConfig.feeCoefLongSell
+      const poolFeeConfigHedgeSell = feeConfig.feeCoefHedgeSell
+      const poolFeeConfigHedgeRebuy = feeConfig.feeCoefHedgeRebuy
       setFeeCoefLongSell(poolFeeConfigLongSell)
       setFeeCoefHedgeSell(poolFeeConfigHedgeSell)
       setFeeCoefHedgeRebuy(poolFeeConfigHedgeRebuy)
-    
-      // console.log(poolConfig)
 
-      const poolLongNumberMax = poolConfig[0];
-      const poolHedgeNumberMax = poolConfig[1];
-      const poolExtraCoef = parseFloat(poolConfig[4]) / 100;
-      const poolPriceVolatilityPercent = parseFloat(poolConfig[2]) / 100;
-      const poolInitHedgeSellPercent = parseFloat(poolConfig[3]) / 100;
-      const poolReturnPercentLongSell = poolConfig[5];
-      const poolReturnPercentHedgeSell = poolConfig[6];
-      const poolReturnPercentHedgeRebuy = poolConfig[7];
+      const poolLongNumberMax = poolConfig.longNumberMax;
+      const poolHedgeNumberMax = poolConfig.hedgeNumberMax
+      const poolExtraCoef = parseFloat(poolConfig.extraCoef) / 100;
+      const poolPriceVolatilityPercent = parseFloat(poolConfig.priceVolatilityPercent) / 100;
+      const poolReturnPercentLongSell = poolConfig.returnPercentLongSell
+      const poolReturnPercentHedgeSell = poolConfig.returnPercentHedgeSell
+      const poolReturnPercentHedgeRebuy = poolConfig.returnPercentHedgeRebuy
       setLongNumberMax(poolLongNumberMax);
       setHedgeNumberMax(poolHedgeNumberMax);
-      setExtraCoef(poolExtraCoef.toFixed(2));
-      setPriceVolatilityPercent(poolPriceVolatilityPercent.toFixed(2));
-      setInitHedgeSellPercent(poolInitHedgeSellPercent.toFixed(2));
+      setExtraCoef(poolExtraCoef);
+      setPriceVolatilityPercent(poolPriceVolatilityPercent);
       setReturnPercentLongSell(poolReturnPercentLongSell);
       setReturnPercentHedgeSell(poolReturnPercentHedgeSell);
       setReturnPercentHedgeRebuy(poolReturnPercentHedgeRebuy);
-    } catch {
-      console.log("Failed to fetch config");
+    } catch (error) {
+      console.log("Failed to fetch config ", error);
     }
   }
 
@@ -124,7 +107,7 @@ function PoolInteractor({ poolId, networkConfig }) {
       const signer = await provider.getSigner();
 
       const poolsnftAddress = networkConfig.poolsnft;
-
+      
       const poolsNFT = new ethers.Contract(
         poolsnftAddress,
         [
@@ -132,12 +115,17 @@ function PoolInteractor({ poolId, networkConfig }) {
         ],
         signer
       );
-
-      const quoteTokenAmountRaw = ethers.parseUnits()
-      const tx = await poolsNFT.deposit(poolId, quoteTokenAmountRaw)
+      // const quoteTokenConfig = networkConfig.quoteTokens.find(
+      //   (token) => token.address.toLowerCase() === quoteTokenAddress.toLowerCase()
+      // );
+      const quoteTokenDecimals = 18// quoteTokenConfig.decimals;
+      const quoteTokenAmountRaw = ethers.parseUnits(inputDeposit, quoteTokenDecimals)
+      const gasEstimate = await poolsNFT.deposit.estimateGas(poolId, quoteTokenAmountRaw)
+      const gasLimit = gasEstimate * 14n / 10n
+      const tx = await poolsNFT.deposit(poolId, quoteTokenAmountRaw, {gasLimit})
       await tx.wait()
-    } catch {
-      console.log("failed to set long number max")
+    } catch (error){
+      console.log("failed to deposit ", error)
     }
 
   }
@@ -152,13 +140,15 @@ function PoolInteractor({ poolId, networkConfig }) {
       const poolsNFT = new ethers.Contract(
         poolsnftAddress,
         [
-          "function deposit(uint256 poolId,uint256 quoteTokenAmount) external returns (uint256 deposited)",
+          "function withdraw(uint256 poolId,uint256 quoteTokenAmount) external returns (uint256 deposited)",
         ],
         signer
       );
-
-      const quoteTokenAmountRaw = ethers.parseUnits()
-      const tx = await poolsNFT.deposit(poolId, quoteTokenAmountRaw)
+      const quoteTokenDecimals = 18;
+      const quoteTokenAmountRaw = ethers.parseUnits(inputWithdraw, quoteTokenDecimals)
+      const gasEstimate = await poolsNFT.deposit.estimateGas(poolId, quoteTokenAmountRaw)
+      const gasLimit = gasEstimate * 14n / 10n
+      const tx = await poolsNFT.withdraw(poolId, quoteTokenAmountRaw, {gasLimit})
       await tx.wait()
     } catch {
       console.log("failed to set long number max")
@@ -320,38 +310,6 @@ function PoolInteractor({ poolId, networkConfig }) {
     }
   }
 
-  const handleSetInitHedgeSellPercent = async () => {
-    try{ 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-
-      const poolsnftAddress = networkConfig.poolsnft;
-
-      const poolsNFT = new ethers.Contract(
-        poolsnftAddress,
-        [
-          "function pools(uint256 poolId) external view returns (address)"
-        ],
-        signer
-      );
-
-      const poolAddress = await poolsNFT.pools(poolId)
-      const pool = new ethers.Contract(
-        poolAddress,
-        [
-          "function setInitHedgeSellPercent(uint256 initHedgeSellPercent) external",
-        ],
-        signer
-      );
-      const initHedgeSellPercentRaw = initHedgeSellPercent * 100
-      // console.log(initHedgeSellPercentRaw)
-      const tx = await pool.setInitHedgeSellPercent(initHedgeSellPercentRaw)
-      await tx.wait()
-    } catch {
-      console.log("failed to set init hedge sell percent")
-    }
-  }
-
   const handleSetReturnPercent = async () => {
     try{ 
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -462,7 +420,10 @@ function PoolInteractor({ poolId, networkConfig }) {
                 placeholder="Enter deposit amount"
                 onChange={(e) => setInputDeposit(e.target.value)}
               />
-              <button className="action-button">
+              <button 
+                onClick={() => handleDeposit()} 
+                className="action-button"
+              >
                 Deposit
               </button>
             </div>
@@ -477,7 +438,10 @@ function PoolInteractor({ poolId, networkConfig }) {
                 placeholder="Enter withdraw amount"
                 onChange={(e) => setInputWithdraw(e.target.value)}
               />
-              <button className="action-button">
+              <button 
+                onClick={() => handleWithdraw()}
+                className="action-button"
+              >
                 Withdraw
               </button>
             </div>
@@ -566,23 +530,6 @@ function PoolInteractor({ poolId, networkConfig }) {
               <button 
                 className="set-button"
                 onClick={() => handleSetPriceVolatilityPercent()}
-              >
-                Set
-              </button>
-            </div>
-          </div>
-
-          <div className="config-field">
-            <div>Init Hedge Sell Percent (Current value: {initHedgeSellPercent.toString()}%)</div>
-            <div className="input-group">
-              <input
-                className="input-field"
-                placeholder='Init Hedge Sell Percent example: 2.6%'
-                onChange={(e) => setInitHedgeSellPercent(parseFloat(e.target.value))}
-              />
-              <button 
-                className="set-button"
-                onClick={() => handleSetInitHedgeSellPercent()}
               >
                 Set
               </button>

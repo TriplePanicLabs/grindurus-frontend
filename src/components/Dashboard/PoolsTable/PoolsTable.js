@@ -39,6 +39,7 @@ function PoolsTable({ setPoolId, networkConfig }) {
         let poolsIds = Array.from({ length: upPoolId - downPoolId + 1 }, (_, i) => downPoolId + i);
         // console.log(poolsIds) 
         let poolNFTInfos = await poolsNFT.getPoolNFTInfosBy(poolsIds);
+        // console.log(poolNFTInfos)
         const tableData = formTabledata(poolNFTInfos)
         setCurrentTableData(tableData)
       }
@@ -55,36 +56,33 @@ function PoolsTable({ setPoolId, networkConfig }) {
       const poolId = poolNFTInfo.poolId.toString();
       const quoteTokenAddress = poolNFTInfo.quoteToken;
       const baseTokenAddress = poolNFTInfo.baseToken;
-      // console.log("a")
-      // console.log(networkConfig)
-      const quoteTokenConfig = networkConfig.quoteTokens.find(
-        (token) => token.address.toLowerCase() === quoteTokenAddress.toLowerCase()
-      );
-      const baseTokenConfig = networkConfig.baseTokens.find(
-        (token) => token.address.toLowerCase() === baseTokenAddress.toLowerCase()
-      );
 
-      const quoteTokenSymbol = poolNFTInfo.quoteTokenSymbol;
-      const baseTokenSymbol = poolNFTInfo.baseTokenSymbol;
-      // const oracleQuoteTokenPerFeeToken = poolNFTInfo.oracleQuoteTokenPerFeeToken
-      // const oracleQuoteTokenPerBaseToken = poolNFTInfo.oracleQuoteTokenPerBaseToken
-      const quoteTokenAmount = ethers.formatUnits(poolNFTInfo.quoteTokenAmount, quoteTokenConfig.decimals);
-      const baseTokenAmount = ethers.formatUnits(poolNFTInfo.baseTokenAmount, baseTokenConfig.decimals);
-      const quoteTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.quoteTokenYieldProfit, quoteTokenConfig.decimals)).toFixed(quoteTokenConfig.decimals);
-      const baseTokenYieldProfit = parseFloat(ethers.formatUnits(poolNFTInfo.baseTokenYieldProfit, baseTokenConfig.decimals)).toFixed(baseTokenConfig.decimals);
-      const quoteTokenTradeProfit = parseFloat(ethers.formatUnits(poolNFTInfo.quoteTokenTradeProfit, quoteTokenConfig.decimals)).toFixed(quoteTokenConfig.decimals);
-      const baseTokenTradeProfit = parseFloat(ethers.formatUnits(poolNFTInfo.baseTokenTradeProfit, baseTokenConfig.decimals)).toFixed(baseTokenConfig.decimals);
-      const aprNumerator = Number(poolNFTInfo.APRNumerator);
-      const aprDenominator = Number(poolNFTInfo.APRDenominator);
-      const apr = aprDenominator > 0 ? `${((aprNumerator / aprDenominator) * 100).toFixed(2)}%` : "N/A";
-      const royaltyPrice = ethers.formatUnits(poolNFTInfo.royaltyPrice, 18);
+      const quoteTokenSymbol = poolNFTInfo.quoteTokenSymbol
+      const baseTokenSymbol = poolNFTInfo.baseTokenSymbol
+      const quoteTokenDecimals = poolNFTInfo.quoteTokenDecimals
+      const baseTokenDecimals = poolNFTInfo.baseTokenDecimals
+      const totalProfits = poolNFTInfo.totalProfits
+      const APR = poolNFTInfo.apr
+      const quoteTokenAmount = ethers.formatUnits(poolNFTInfo.quoteTokenAmount, quoteTokenDecimals)
+      const baseTokenAmount = ethers.formatUnits(poolNFTInfo.baseTokenAmount, baseTokenDecimals)
+      const quoteTokenYieldProfit = parseFloat(ethers.formatUnits(totalProfits.quoteTokenYieldProfit, quoteTokenDecimals)).toFixed(Number(quoteTokenDecimals))
+      const baseTokenYieldProfit = parseFloat(ethers.formatUnits(totalProfits.baseTokenYieldProfit, baseTokenDecimals)).toFixed(Number(baseTokenDecimals))
+      const quoteTokenTradeProfit = parseFloat(ethers.formatUnits(totalProfits.quoteTokenTradeProfit, quoteTokenDecimals)).toFixed(Number(quoteTokenDecimals))
+      const baseTokenTradeProfit = parseFloat(ethers.formatUnits(totalProfits.baseTokenTradeProfit, baseTokenDecimals)).toFixed(Number(baseTokenDecimals))
+      console.log(poolNFTInfo.startTimestamp)
+      const start = new Date(Number(poolNFTInfo.startTimestamp) * 1000).toDateString();
+      const aprNumerator = Number(APR.APRNumerator);
+      const aprDenominator = Number(APR.APRDenominator);
+      const apr = aprDenominator > 0 ? `${((aprNumerator / aprDenominator) * 100).toFixed(2)}%` : "N/A"
+      const royaltyPrice = ethers.formatUnits(poolNFTInfo.royaltyPrice, 18)
 
       return {
-        networkIcon: logoArbitrum, // Путь к иконке сети
+        networkIcon: logoArbitrum,
         poolId: poolId,
         quoteToken: `${quoteTokenAmount} ${quoteTokenSymbol} + ${baseTokenAmount} ${baseTokenSymbol}`,
         yieldProfit: `${quoteTokenYieldProfit} ${quoteTokenSymbol} + ${baseTokenYieldProfit} ${baseTokenSymbol}`,
         tradeProfit: `${quoteTokenTradeProfit} ${quoteTokenSymbol} + ${baseTokenTradeProfit} ${baseTokenSymbol}`,
+        start: start,
         apr: apr,
         buyRoyaltyPrice: `${royaltyPrice}`,
       };
@@ -183,6 +181,7 @@ function PoolsTable({ setPoolId, networkConfig }) {
             <th>Pool ID</th>
             <th>Quote Token + Base Token</th>
             <th>Yield Profit + Trade Profit</th>
+            <th>Start</th>
             <th>APR</th>
             <th>Buy Royalty</th>
             <th>Grind Pool</th>
@@ -196,6 +195,7 @@ function PoolsTable({ setPoolId, networkConfig }) {
               <td>{row.poolId}</td>
               <td>{row.quoteToken}</td>
               <td>{row.yieldProfit}<br />{row.tradeProfit}</td>
+              <td>{row.start}</td>
               <td>{row.apr}</td>
               <td>
                 <button 

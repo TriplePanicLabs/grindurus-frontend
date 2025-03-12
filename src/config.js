@@ -12,9 +12,9 @@ const config = {
     name: 'Arbitrum',
     chainId: '0xa4b1',
     logo: logoArbitrum,
-    poolsnft: '0x2B2301dC45550e0900791c952278dd49C3c68607',
-    registry: '0x21b111fd6a43C72Ce946A2C9fD7D7ECbc313fbDC',
-    intentsnft: '0x6F5A522C76fA20717a2edA165eE47D9F7Df9f0D4',
+    poolsnft: '0xF385F2b72e1A4EeBb21157e9a1189143F15a6e97',
+    registry: '0xD11FCDD32563292AdD38E2b5edC498732b5Cb040',
+    intentsnft: '0xc8bC80B5Fa7DC89ce0f9214b4839E32208c586e1',
     strategies: [
       { 
         id: 0, 
@@ -313,11 +313,6 @@ const config = {
           "internalType": "uint256"
         },
         {
-          "name": "initHedgeSellPercent",
-          "type": "uint256",
-          "internalType": "uint256"
-        },
-        {
           "name": "returnPercentLongSell",
           "type": "uint256",
           "internalType": "uint256"
@@ -329,6 +324,31 @@ const config = {
         },
         {
           "name": "returnPercentHedgeRebuy",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getFeeConfig",
+      "inputs": [
+        { "name": "poolId", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [
+        {
+          "name": "longSellFeeCoef",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellFeeCoef",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeRebuyFeeCoef",
           "type": "uint256",
           "internalType": "uint256"
         }
@@ -363,11 +383,17 @@ const config = {
       ],
       "outputs": [
         {
-          "name": "poolInfos",
+          "name": "poolNFTInfos",
           "type": "tuple[]",
-          "internalType": "struct IPoolsNFT.PoolNFTInfo[]",
+          "internalType": "struct IPoolsNFTLens.PoolNFTInfo[]",
           "components": [
             { "name": "poolId", "type": "uint256", "internalType": "uint256" },
+            {
+              "name": "strategyId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            { "name": "pool", "type": "address", "internalType": "address" },
             {
               "name": "config",
               "type": "tuple",
@@ -394,11 +420,6 @@ const config = {
                   "internalType": "uint256"
                 },
                 {
-                  "name": "initHedgeSellPercent",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
                   "name": "returnPercentLongSell",
                   "type": "uint256",
                   "internalType": "uint256"
@@ -416,18 +437,39 @@ const config = {
               ]
             },
             {
-              "name": "strategyId",
-              "type": "uint256",
-              "internalType": "uint256"
+              "name": "feeConfig",
+              "type": "tuple",
+              "internalType": "struct IURUS.FeeConfig",
+              "components": [
+                {
+                  "name": "longSellFeeCoef",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "hedgeSellFeeCoef",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "hedgeRebuyFeeCoef",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
             },
-            { "name": "pool", "type": "address", "internalType": "address" },
+            {
+              "name": "oracleQuoteTokenPerBaseToken",
+              "type": "address",
+              "internalType": "address"
+            },
             {
               "name": "oracleQuoteTokenPerFeeToken",
               "type": "address",
               "internalType": "address"
             },
             {
-              "name": "oracleQuoteTokenPerBaseToken",
+              "name": "feeToken",
               "type": "address",
               "internalType": "address"
             },
@@ -442,6 +484,11 @@ const config = {
               "internalType": "address"
             },
             {
+              "name": "feeTokenSymbol",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
               "name": "quoteTokenSymbol",
               "type": "string",
               "internalType": "string"
@@ -450,6 +497,26 @@ const config = {
               "name": "baseTokenSymbol",
               "type": "string",
               "internalType": "string"
+            },
+            {
+              "name": "oracleQuoteTokenPerBaseTokenDecimals",
+              "type": "uint8",
+              "internalType": "uint8"
+            },
+            {
+              "name": "oracleQuoteTokenPerFeeTokenDecimals",
+              "type": "uint8",
+              "internalType": "uint8"
+            },
+            {
+              "name": "quoteTokenDecimals",
+              "type": "uint8",
+              "internalType": "uint8"
+            },
+            {
+              "name": "baseTokenDecimals",
+              "type": "uint8",
+              "internalType": "uint8"
             },
             {
               "name": "quoteTokenAmount",
@@ -462,39 +529,80 @@ const config = {
               "internalType": "uint256"
             },
             {
-              "name": "quoteTokenYieldProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "baseTokenYieldProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "quoteTokenTradeProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "baseTokenTradeProfit",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "APRNumerator",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
-              "name": "APRDenominator",
-              "type": "uint256",
-              "internalType": "uint256"
-            },
-            {
               "name": "activeCapital",
               "type": "uint256",
               "internalType": "uint256"
+            },
+            {
+              "name": "startTimestamp",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "totalProfits",
+              "type": "tuple",
+              "internalType": "struct IURUS.TotalProfits",
+              "components": [
+                {
+                  "name": "quoteTokenYieldProfit",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "baseTokenYieldProfit",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "quoteTokenTradeProfit",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "baseTokenTradeProfit",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "roi",
+              "type": "tuple",
+              "internalType": "struct IPoolsNFTLens.ROI",
+              "components": [
+                {
+                  "name": "ROINumerator",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "ROIDeniminator",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "ROIPeriod",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "apr",
+              "type": "tuple",
+              "internalType": "struct IPoolsNFTLens.APR",
+              "components": [
+                {
+                  "name": "APRNumerator",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "APRDenominator",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
             },
             {
               "name": "royaltyPrice",
@@ -580,17 +688,61 @@ const config = {
         { "name": "poolId", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" },
-        { "name": "", "type": "uint256", "internalType": "uint256" }
+        {
+          "name": "longBuyPriceMin",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "longSellQuoteTokenAmountThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "longSellSwapPriceThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellInitPriceThresholdHigh",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellInitPriceThresholdLow",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellLiquidity",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellQuoteTokenAmountThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellTargetPrice",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeSellSwapPriceThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeRebuyBaseTokenAmountThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "hedgeRebuySwapPriceThreshold",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
       ],
       "stateMutability": "view"
     },
@@ -677,9 +829,24 @@ const config = {
     },
     {
       "type": "function",
+      "name": "grinderAI",
+      "inputs": [],
+      "outputs": [
+        { "name": "", "type": "address", "internalType": "contract IGrinderAI" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
       "name": "init",
       "inputs": [
-        { "name": "_grETH", "type": "address", "internalType": "address" }
+        {
+          "name": "_poolsNFTLens",
+          "type": "address",
+          "internalType": "address"
+        },
+        { "name": "_grETH", "type": "address", "internalType": "address" },
+        { "name": "_grinderAI", "type": "address", "internalType": "address" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -716,9 +883,9 @@ const config = {
     },
     {
       "type": "function",
-      "name": "isStrategiest",
+      "name": "isDisapprovedGrinderAI",
       "inputs": [
-        { "name": "strategiest", "type": "address", "internalType": "address" }
+        { "name": "_ownerOf", "type": "address", "internalType": "address" }
       ],
       "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
       "stateMutability": "view"
@@ -790,7 +957,7 @@ const config = {
       "name": "name",
       "inputs": [],
       "outputs": [{ "name": "", "type": "string", "internalType": "string" }],
-      "stateMutability": "view"
+      "stateMutability": "pure"
     },
     {
       "type": "function",
@@ -846,13 +1013,13 @@ const config = {
     },
     {
       "type": "function",
-      "name": "poolsNFTImage",
+      "name": "poolsNFTLens",
       "inputs": [],
       "outputs": [
         {
           "name": "",
           "type": "address",
-          "internalType": "contract IPoolsNFTImage"
+          "internalType": "contract IPoolsNFTLens"
         }
       ],
       "stateMutability": "view"
@@ -862,7 +1029,9 @@ const config = {
       "name": "rebalance",
       "inputs": [
         { "name": "poolId0", "type": "uint256", "internalType": "uint256" },
-        { "name": "poolId1", "type": "uint256", "internalType": "uint256" }
+        { "name": "poolId1", "type": "uint256", "internalType": "uint256" },
+        { "name": "rebalance0", "type": "uint8", "internalType": "uint8" },
+        { "name": "rebalance1", "type": "uint8", "internalType": "uint8" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -1003,20 +1172,20 @@ const config = {
     },
     {
       "type": "function",
-      "name": "setBaseURI",
+      "name": "setDepositor",
       "inputs": [
-        { "name": "_baseURI", "type": "string", "internalType": "string" }
+        { "name": "poolId", "type": "uint256", "internalType": "uint256" },
+        { "name": "depositor", "type": "address", "internalType": "address" },
+        { "name": "_depositorApproval", "type": "bool", "internalType": "bool" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
     },
     {
       "type": "function",
-      "name": "setDepositor",
+      "name": "setGRETH",
       "inputs": [
-        { "name": "poolId", "type": "uint256", "internalType": "uint256" },
-        { "name": "depositor", "type": "address", "internalType": "address" },
-        { "name": "_depositorApproval", "type": "bool", "internalType": "bool" }
+        { "name": "_grETH", "type": "address", "internalType": "address" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -1051,6 +1220,15 @@ const config = {
     },
     {
       "type": "function",
+      "name": "setGrinderAI",
+      "inputs": [
+        { "name": "_grinderAI", "type": "address", "internalType": "address" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "setMinDeposit",
       "inputs": [
         { "name": "token", "type": "address", "internalType": "address" },
@@ -1061,10 +1239,10 @@ const config = {
     },
     {
       "type": "function",
-      "name": "setPoolsNFTImage",
+      "name": "setPoolsNFTLens",
       "inputs": [
         {
-          "name": "_poolsNFTImage",
+          "name": "_poolsNFTLens",
           "type": "address",
           "internalType": "address"
         }
@@ -1144,16 +1322,6 @@ const config = {
     },
     {
       "type": "function",
-      "name": "setStrategiest",
-      "inputs": [
-        { "name": "strategiest", "type": "address", "internalType": "address" },
-        { "name": "_isStrategiest", "type": "bool", "internalType": "bool" }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
       "name": "setStrategyFactory",
       "inputs": [
         {
@@ -1208,7 +1376,7 @@ const config = {
       "name": "symbol",
       "inputs": [],
       "outputs": [{ "name": "", "type": "string", "internalType": "string" }],
-      "stateMutability": "view"
+      "stateMutability": "pure"
     },
     {
       "type": "function",
@@ -1685,6 +1853,7 @@ const config = {
     { "type": "error", "name": "NoCapital", "inputs": [] },
     { "type": "error", "name": "NotAgent", "inputs": [] },
     { "type": "error", "name": "NotDepositor", "inputs": [] },
+    { "type": "error", "name": "NotMatchPoolsNFT", "inputs": [] },
     { "type": "error", "name": "NotOwner", "inputs": [] },
     { "type": "error", "name": "NotOwnerOf", "inputs": [] },
     { "type": "error", "name": "NotOwnerOrPending", "inputs": [] },
@@ -2061,6 +2230,7 @@ const config = {
       ],
       "stateMutability": "nonpayable"
     },
+    { "type": "receive", "stateMutability": "payable" },
     {
       "type": "function",
       "name": "MIN_PERIOD",
@@ -2162,7 +2332,20 @@ const config = {
     },
     {
       "type": "function",
-      "name": "getIntent",
+      "name": "getIntentBy",
+      "inputs": [
+        { "name": "poolId", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [
+        { "name": "_account", "type": "address", "internalType": "address" },
+        { "name": "_expire", "type": "uint256", "internalType": "uint256" },
+        { "name": "_poolIds", "type": "uint256[]", "internalType": "uint256[]" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getIntentOf",
       "inputs": [
         { "name": "account", "type": "address", "internalType": "address" }
       ],
@@ -2180,19 +2363,6 @@ const config = {
         { "name": "account", "type": "address", "internalType": "address" }
       ],
       "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "intentsNFTImage",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IIntentsNFTImage"
-        }
-      ],
       "stateMutability": "view"
     },
     {
@@ -2330,13 +2500,9 @@ const config = {
     },
     {
       "type": "function",
-      "name": "setIntentsNFTImage",
+      "name": "setPoolsNFT",
       "inputs": [
-        {
-          "name": "_intentsNFTImage",
-          "type": "address",
-          "internalType": "address"
-        }
+        { "name": "_poolsNFT", "type": "address", "internalType": "address" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
